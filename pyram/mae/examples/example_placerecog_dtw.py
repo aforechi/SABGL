@@ -1,5 +1,5 @@
-from pyram.mae.vgram.vgram_core import VGRAM
-from pyram.mae.vgram.vgram_synapse import ConnectionGaussian, ConnectionRandom, ConnectionInput
+from mae.vgram.vgram_core import VGRAM
+from mae.vgram.vgram_synapse import ConnectionGaussian, ConnectionRandom, ConnectionInput
 from example_placerecog_config import params
 from example_placerecog_utils import LoadDataset, ClearFalseNegatives, EvaluateOutput
 import numpy as np
@@ -58,7 +58,7 @@ def run_ensemble(train_filename, train_path, test_filename, test_path,
     test_size = test_label.shape[0]
     pred_label = -1 * np.ones((test_size,), dtype=int)
     pred_buffer = -1 * np.ones((batch_size, batch_size), dtype=int)
-    for i in xrange(test_size):
+    for i in range(test_size):
         test_data_i = test_data[i:i+batch_size,:]
         predicted = network.testSequence(test_data_i, step_list(step_size))
         '''
@@ -71,7 +71,7 @@ def run_ensemble(train_filename, train_path, test_filename, test_path,
     pred_label[0:batch_size] = test_label[0:batch_size] #disregard first results
     
     result_file = open(result_filename, 'w')
-    for frame_radius in xrange(19):
+    for frame_radius in range(19):
         result = EvaluateOutput(pred_label, test_label.flatten(), max_number_of_frames=frame_radius)
         print>>result_file, (result * 100.0)
     

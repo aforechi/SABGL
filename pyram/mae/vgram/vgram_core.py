@@ -1,4 +1,4 @@
-from vgram_wrapper import VG_RAM_WNN, DATA_SET
+from .vgram_wrapper import VG_RAM_WNN, DATA_SET
 
 class VGRAM(object):
     connectionList = []

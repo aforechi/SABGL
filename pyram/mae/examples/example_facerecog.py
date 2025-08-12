@@ -9,8 +9,8 @@ def loadFaceImage(path, filename, width, height, channels):
     g = np.empty((height, width, channels), dtype=np.uint8)
     f = np.fromfile(path + filename + '.raw', dtype=np.uint8,count=height*width*channels)
     i = 0
-    for y in xrange(height):
-        for x in xrange(width):
+    for y in range(height):
+        for x in range(width):
             g[y,x,0] = f[i + height * width * 2]
             g[y,x,1] = f[i + height * width]
             g[y,x,2] = f[i]

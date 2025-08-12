@@ -1,17 +1,25 @@
+# vgram_wrapper.py
+
 import numpy as np
 import ctypes
 import pickle
 import os.path
-from ctypes_utils import ctypes2numpy, array_1d_int
-from ctypes_utils import numpy2ctypes
+from .ctypes_utils import ctypes2numpy, array_1d_int
+from .ctypes_utils import numpy2ctypes
 
+# --- Library Loading ---
 basepath = os.path.abspath(os.path.dirname(__file__))
+lib_path = os.path.join(basepath, "vgram.so")
+
 try:
-    #to debug uncomment following line
-    #libvgram = ctypes.cdll.LoadLibrary(os.path.join(basepath, "/Users/avelino/Sources/deepslam/pyram_build/src/vgram.so"))
-    libvgram = ctypes.cdll.LoadLibrary(os.path.join(basepath, "vgram.so"))
-except:
-    raise OSError,"Could not load VGRAM dynamic library"
+    # Use an environment variable for debugging custom library paths
+    # Example: export VGRAM_LIB_PATH=/path/to/my/debug/vgram.so
+    debug_lib_path = os.getenv("VGRAM_LIB_PATH")
+    libvgram = ctypes.cdll.LoadLibrary(debug_lib_path or lib_path)
+except OSError:
+    raise OSError(
+        "Could not load VGRAM dynamic library. Ensure 'vgram.so' is present or set VGRAM_LIB_PATH."
+    )
 
 class VG_RAM_WNN(ctypes.Structure):
     _fields_ = [
@@ -196,6 +204,6 @@ cTrain.argtypes                     = [ctypes.POINTER(VG_RAM_WNN), ctypes.POINTE
 cTest                               = libvgram.Test
 cTest.argtypes                      = [ctypes.POINTER(VG_RAM_WNN), ctypes.POINTER(DATA_SET)]
 
-cTestSequence                       = libvgram.TestSequence
-cTestSequence.argtypes              = [ctypes.POINTER(VG_RAM_WNN), ctypes.POINTER(DATA_SET), array_1d_int, ctypes.c_int]
+# cTestSequence                       = libvgram.TestSequence
+# cTestSequence.argtypes              = [ctypes.POINTER(VG_RAM_WNN), ctypes.POINTER(DATA_SET), array_1d_int, ctypes.c_int]
 

@@ -1,24 +1,24 @@
 import numpy as np
-from pyram.mae.vgram.vgram_core import VGRAM
-from pyram.mae.vgram.vgram_output import NetworkOutput
-from pyram.mae.vgram.vgram_image import ImageProcProxy
-from pyram.mae.vgram.vgram_synapse import ConnectionLogPolar, ConnectionInput
+from mae.vgram.vgram_core import VGRAM
+from mae.vgram.vgram_output import NetworkOutput
+from mae.vgram.vgram_image import ImageProcProxy
+from mae.vgram.vgram_synapse import ConnectionLogPolar, ConnectionInput
 from example_trafficsign_config import params
 
 def LoadDataset(filename, imagepath):
     file_list = np.genfromtxt(filename, dtype=np.dtype([('Filename','S21'), ('Width', int), ('Height', int), ('roi_x1', int), ('roi_y1', int), ('roi_x2', int), ('roi_y2', int), ('classId', int)]))
 
-    ImageProcProxy.createCLAHE(clipLimit=1.4, tileGridSize=(2,2))
+    clahe = ImageProcProxy.createCLAHE(clipLimit=1.4, tileGridSize=(2,2))
     input_images = ImageProcProxy.emptyDataset(file_list.shape[0], params['input']['width'], params['input']['height'])
-    for sample in xrange(file_list.shape[0]):
+    for sample in range(file_list.shape[0]):
         image_file          = ImageProcProxy.readImageColor(imagepath + file_list['Filename'][sample])
         image_roi           = ImageProcProxy.cropImage(image_file, 
                                                        file_list['roi_x1'][sample], file_list['roi_y1'][sample], 
                                                        file_list['roi_x2'][sample], file_list['roi_y2'][sample])
         image_clahe         = ImageProcProxy.emptyLike(image_roi)
-        image_clahe[:,:,0]  = ImageProcProxy.applyCLAHE(image_roi[:,:,0])
-        image_clahe[:,:,1]  = ImageProcProxy.applyCLAHE(image_roi[:,:,1])
-        image_clahe[:,:,2]  = ImageProcProxy.applyCLAHE(image_roi[:,:,2])
+        image_clahe[:,:,0]  = ImageProcProxy.applyCLAHE(clahe, image_roi[:,:,0])
+        image_clahe[:,:,1]  = ImageProcProxy.applyCLAHE(clahe, image_roi[:,:,1])
+        image_clahe[:,:,2]  = ImageProcProxy.applyCLAHE(clahe, image_roi[:,:,2])
         image_resized       = ImageProcProxy.resizeInterLinear(image_clahe, 
                                     params['input']['width'], 
                                     params['input']['height'])

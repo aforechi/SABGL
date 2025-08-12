@@ -1,6 +1,6 @@
-from pyram.mae.vgram.vgram_core import VGRAM
-from pyram.mae.vgram.vgram_output import NetworkOutput
-from pyram.mae.vgram.vgram_synapse import ConnectionGaussian, ConnectionRandom, ConnectionInput
+from mae.vgram.vgram_core import VGRAM
+from mae.vgram.vgram_output import NetworkOutput
+from mae.vgram.vgram_synapse import ConnectionGaussian, ConnectionRandom, ConnectionInput
 from example_placerecog_utils import LoadDataset, ClearFalseNegatives, EvaluateOutput
 from example_placerecog_config import params
 import numpy as np
@@ -40,7 +40,7 @@ def run_vgram(train_filename, train_path, test_filename, test_path,
     pred_label[0:batch_size] = test_label[0:batch_size] #disregard first results
     
     result_file = open(result_filename, 'w')
-    for frame_radius in xrange(19):
+    for frame_radius in range(19):
         result = EvaluateOutput(pred_label, test_label.flatten(), max_number_of_frames=frame_radius)
         print>>result_file, (result * 100.0)
     

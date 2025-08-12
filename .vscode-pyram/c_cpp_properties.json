@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "browse": {
+                "databaseFilename": "${default}",
+                "limitSymbolsToIncludedHeaders": false
+            },
+            "includePath": [
+                "/workspace/devel/include/**",
+                "/opt/ros/noetic/include/**",
+                "/usr/include/**"
+            ],
+            "compileCommands": "${workspaceFolder}/build/compile_commands.json",
+            "name": "ROS",
+            "intelliSenseMode": "clang-x64",
+            "compilerPath": "/usr/bin/clang++-18",
+            "cStandard": "c23",
+            "cppStandard": "c++17"
+        }
+    ],
+    "version": 4
+}

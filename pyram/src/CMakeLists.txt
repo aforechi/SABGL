@@ -22,8 +22,7 @@ endif(USE_CUDA)
 if (CUDA_FOUND)
     set(CUDA_SEPARABLE_COMPILATION ON)
     
-	set (CUDA_NVCC_FLAGS, ${CUDA_NVCC_FLAGS};-gencode arch=compute_30,code=sm_30)
-	set (CUDA_NVCC_FLAGS, ${CUDA_NVCC_FLAGS};-use_fast_math;--compiler-options)
+    set(CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS} -gencode arch=compute_75,code=sm_75 -gencode arch=compute_86,code=sm_86 -use_fast_math --compiler-options -fPIC)
 	
 	if (USE_MIXED_OMP_CUDA)
 		add_definitions(-DTRAIN_ON_CPU)

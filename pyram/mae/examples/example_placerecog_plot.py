@@ -61,7 +61,7 @@ def plot_map(algoname, year_for_train, year_for_test, offset_train, offset_test)
         xx = []
         yy = []
         plt.figure(figsize=(10, 6), dpi=100)
-        for sample in xrange(output.shape[1]):
+        for sample in range(output.shape[1]):
             if not TruePositive(sample, predicted, expected, max_number_of_frames=5):
                 xx.append([x[expected[sample]], x[predicted[sample]]])
                 yy.append([y[expected[sample]], y[predicted[sample]]])
@@ -101,7 +101,7 @@ def show_output(algoname, year_for_train, year_for_test, offset_train, offset_te
     window = None
     plt.axis("off")
     pause = True
-    for sample in xrange(output.shape[1]):
+    for sample in range(output.shape[1]):
         predicted_train_sample = np.where( train_label == predicted[sample] )[0][0]
         expected_train_sample = np.where( train_label == expected[sample] )[0][0]
         train_predicted = train_data[predicted_train_sample]

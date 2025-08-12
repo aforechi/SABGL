@@ -9,8 +9,8 @@ set (PACKAGE_VERSION ${PACKAGE_MAJOR_VERSION}.${PACKAGE_MINOR_VERSION}.${PACKAGE
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/modules/")
 
-option(USE_CUDA "Build VG-RAM with mixed CUDA and OpenMP support" OFF)
-option(USE_MIXED_OMP_CUDA "Build VG-RAM with mixed CUDA and OpenMP support" OFF)
+option(USE_CUDA "Build VG-RAM with mixed CUDA and OpenMP support" ON)
+option(USE_MIXED_OMP_CUDA "Build VG-RAM with mixed CUDA and OpenMP support" ON)
 
 if (APPLE)
 	set(CMAKE_MACOSX_RPATH 1)

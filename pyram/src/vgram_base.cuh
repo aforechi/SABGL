@@ -4,7 +4,7 @@
 
 #include <cuda.h>
 #include <cuda_runtime_api.h>
-#include <device_functions.h>
+#include <cuda_runtime.h>
 
 #include "vgram.h"
 

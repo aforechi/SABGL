@@ -1,9 +1,9 @@
 import numpy as np
 from example_character_config import params
-from pyram.mae.vgram.vgram_synapse import ConnectionGaussian, ConnectionInput
-from pyram.mae.vgram.vgram_output import NetworkOutput
-from pyram.mae.vgram.vgram_image import ImageProcProxy
-from pyram.mae.vgram.vgram_core import VGRAM
+from mae.vgram import ConnectionGaussian, ConnectionInput
+from mae.vgram import NetworkOutput
+from mae.vgram import ImageProcProxy
+from mae.vgram import VGRAM
 
 def LoadDataset(imagefile, labelfile, finalsize):
     loaded = np.fromfile(file=open(imagefile),dtype=np.uint8)
@@ -13,7 +13,7 @@ def LoadDataset(imagefile, labelfile, finalsize):
     labels = loaded[8:].reshape((images.shape[0]))
     
     input_images = ImageProcProxy.emptyDataset(images.shape[0], params['input']['width'], params['input']['height'])
-    for sample in xrange(images.shape[0]):
+    for sample in range(images.shape[0]):
         image_resized       = ImageProcProxy.resizeInterLinear(images[sample], params['input']['width'], params['input']['height'])
         image_gaussian      = ImageProcProxy.applyGaussian(image_resized, 
                                     params['filter']['gaussian_radius'], 
@@ -40,4 +40,4 @@ if __name__ == '__main__':
                                               params['dataset']['test']['labels'],
                                               params['dataset']['test']['total'])
     output_data = network.test(input_data, class_data)
-    print "Percentage correct =", NetworkOutput.MajorityVoteMean(output_data, class_data.flatten()) * 100.0, "%"
+    print("Percentage correct =", NetworkOutput.MajorityVoteMean(output_data, class_data.flatten()) * 100.0, "%")

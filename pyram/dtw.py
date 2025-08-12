@@ -225,7 +225,7 @@ if __name__ == '__main__':
     train_size = train.shape[0]
     test_size = test.shape[0]
     pred_label = -1 * np.ones((test_size,), dtype=int)
-    for i in xrange((batch_size-1), test_size):
+    for i in range((batch_size-1), test_size):
         test_data = test[i-(batch_size-1):i+1]
         #path = testSubequence(train, test_data, step_list=stepSizeCondition(2), show_graph=True)
         path = testSubequenceRightAligned(train, test_data, step_list=stepSizeCondition(2), show_graph=True)

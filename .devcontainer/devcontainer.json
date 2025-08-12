@@ -1,0 +1,67 @@
+{
+    "name": "compose-workspace",
+    "dockerComposeFile": "docker-compose.yaml",
+    "service": "pyram",
+    "runServices": [
+        "pyram"
+    ],
+    "workspaceFolder": "/workspace",
+    "postCreateCommand": "curl -sSL get.docker.com | sh",
+    "onCreateCommand": "echo '. /ros_entrypoint.sh' >> /etc/profile",
+    "postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}/pyram",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "terminal.integrated.shell.linux": "/usr/bin/bash",
+                "remote.autoForwardPorts": false
+            },
+            "extensions": [
+                "cschlosser.doxdocgen",
+                "DavidAnson.vscode-markdownlint",
+                "donjayamanne.githistory",
+                "eamodio.gitlens",
+                "fredericbonnet.cmake-test-adapter",
+                "GitLab.gitlab-workflow",
+                "hbenl.vscode-test-explorer",
+                "jock.svg",
+                "josetr.cmake-language-support-vscode",
+                "llvm-vs-code-extensions.vscode-clangd",
+                "mhutchie.git-graph",
+                "ms-azuretools.vscode-docker",
+                "ms-iot.vscode-ros",
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "ms-vscode-remote.remote-containers",
+                "ms-vscode-remote.remote-ssh",
+                "ms-vscode-remote.remote-ssh-edit",
+                "ms-vscode-remote.remote-wsl",
+                "ms-vscode-remote.vscode-remote-extensionpack",
+                "ms-vscode.cmake-tools",
+                "ms-vscode.cpptools",
+                "ms-vscode.cpptools-extension-pack",
+                "ms-vscode.cpptools-themes",
+                "ms-vscode.makefile-tools",
+                "ms-vscode.remote-explorer",
+                "ms-vscode.remote-server",
+                "ms-vscode.test-adapter-converter",
+                "paroj.language-ogre-script",
+                "redhat.vscode-xml",
+                "redhat.vscode-yaml",
+                "shd101wyy.markdown-preview-enhanced",
+                "twxs.cmake",
+                "vadimcn.vscode-lldb",
+                "wayou.vscode-todo-highlight",
+                "yzhang.markdown-all-in-one",
+                "hashicorp.hcl"
+            ]
+        }
+    },
+    "capAdd": [
+        "SYS_PTRACE"
+    ],
+    "securityOpt": [
+        "seccomp=unconfined",
+        "apparmor=unconfined"
+    ],
+    "remoteUser": "root"
+}
